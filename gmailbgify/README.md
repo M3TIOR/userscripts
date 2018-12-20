@@ -13,6 +13,28 @@ I want it to do on my end for now but still needs work. Below is how
 I envision it to work once I'm done. It is nowhere near completion yet.
 Please be patient and give me a little more time. >.> ***
 
+### TODO:
+
+ * [ ] Investigate InboxSDK for use within the add in for UI implementation
+       and long term stability since Gmail's doctree is clobbered.
+
+ * [ ] Implement external background button and basic URL link dialogue.
+
+ * [ ] Implement preview window for external resource.
+
+ * [ ] Implement previously used background memory and reuse using javascript
+       local data API.
+
+### EXTRA:
+
+ * [ ] Find a way to force content to load over HTTPS always
+
+ * [ ] Implement custom background blur slider
+ 
+ * [ ] Implement custom background vignette slider
+
+ * [ ] Investigate cross device background save feature using Google APIs
+
 ------
 
 To register a background, simply go to the theme's panel and in the bottom
