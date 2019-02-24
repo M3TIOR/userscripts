@@ -13,7 +13,7 @@ Kitten's still got a little growing up to do, here are their next milestones:
  * Button to download zipped pages
 
 They just went in for a grooming here not to recently so if you wish to inspect
-the source you'll find the contents a bit more readable.
+the source you'll find their coat a bit less tangled.
 
 ***And if any devs from monstercat find out I'm sure they'll steal their kitty back away from us.***
 So please, don't ruin the free kitty petting parade.
