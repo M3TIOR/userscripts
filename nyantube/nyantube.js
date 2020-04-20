@@ -123,11 +123,11 @@ const Base64 = {
 		// in certain browsers may need whitespace after properties.
 		.replace(/\n/g, " ");
 
-	if (GM_addStyle != undefined) {
+	if (GM_addStyle !== undefined) {
 		GM_addStyle(css);
-	} else if (PRO_addStyle != undefined) {
+	} else if (PRO_addStyle !== undefined) {
 		PRO_addStyle(css);
-	} else if (addStyle != undefined) {
+	} else if (addStyle !== undefined) {
 		addStyle(css);
 	} else {
 		var node = document.createElement("style");
