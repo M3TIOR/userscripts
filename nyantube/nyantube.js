@@ -6,7 +6,7 @@
 // @homepage      https://github.com/m3tior/userscripts
 // @include       https://www.youtube.com/watch?*
 // @run-at        document-start
-// @version       1.0.3
+// @version       1.0.4
 // ==/UserScript==
 
 /**
@@ -28,10 +28,10 @@ const Base64 = {
 	    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 
 	    while (i < input.length) {
-	        enc1 = this._keyStr.indexOf(input.charAt(i++));
-	        enc2 = this._keyStr.indexOf(input.charAt(i++));
-	        enc3 = this._keyStr.indexOf(input.charAt(i++));
-	        enc4 = this._keyStr.indexOf(input.charAt(i++));
+	        enc1 = Base64._keyStr.indexOf(input.charAt(i++));
+	        enc2 = Base64._keyStr.indexOf(input.charAt(i++));
+	        enc3 = Base64._keyStr.indexOf(input.charAt(i++));
+	        enc4 = Base64._keyStr.indexOf(input.charAt(i++));
 
 	        chr1 = (enc1 << 2) | (enc2 >> 4);
 	        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
@@ -123,11 +123,13 @@ const Base64 = {
 		// in certain browsers may need whitespace after properties.
 		.replace(/\n/g, " ");
 
-	if (GM_addStyle !== undefined) {
+	// The typeof requests are necessary to protect strict evaluation from
+	// terminating us early when the tested values are undefined *facepalm*
+	if (typeof GM_addStyle !== "undefined") {
 		GM_addStyle(css);
-	} else if (PRO_addStyle !== undefined) {
+	} else if (typeof PRO_addStyle !== "undefined") {
 		PRO_addStyle(css);
-	} else if (addStyle !== undefined) {
+	} else if (typeof addStyle !== "undefined") {
 		addStyle(css);
 	} else {
 		var node = document.createElement("style");
