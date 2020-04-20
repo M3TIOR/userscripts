@@ -11,18 +11,18 @@
 
 /**
 *
-*  Base64 encode / decode
+*  Base64 decode
 *  http://www.webtoolkit.info/
 *  Modified to suit my needs for binary decoding.
 *
 **/
-var Base64 = {
+const Base64 = {
 	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-	decode : function (input) {
-	    var output = [];
-	    var chr1, chr2, chr3;
-	    var enc1, enc2, enc3, enc4;
-	    var i = 0;
+	decode : (input) => {
+	    let output = [];
+	    let chr1, chr2, chr3;
+	    let enc1, enc2, enc3, enc4;
+	    let i = 0;
 
 			// sanitizer
 	    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
@@ -51,7 +51,7 @@ var Base64 = {
   'use-strict';
 
 	// Base 64 encoded Nyan Cat GIF
-	var gif64 = [
+	const gif64 = [
 		"R0lGODlhIQAVAMIGAAAAAP8zmZmZmf+Z///Mmf///6KakaKakSH/C05FVFNDQVBFMi4wAw",
 		"EAAAAh/hFDcmVhdGVkIHdpdGggR0lNUAAh+QQJAQAHACwAAAAAIQAVAAADnHi6C/4wOkYr",
 		"IDjrjUH9FzaMZElm3seE5hCMb9mpKwG3+ECk9HHlI8dN55mofjmAQACQOZYpiAJZiimhpy",
@@ -77,54 +77,57 @@ var Base64 = {
 	].join("");
 
 	// Transforms the gif Base64 string into a byte array in memory
-	var gifBytes = new Uint8Array(Base64.decode(gif64));
+	const gifBytes = new Uint8Array(Base64.decode(gif64));
 	// Changes the byte array to a readable Blob object with mimetype
-	var gifBlob = new Blob([gifBytes.buffer], {type: "image/gif"});
+	const gifBlob = new Blob([gifBytes.buffer], {type: "image/gif"});
 	// Adds a URL to access the image with.
-	var gifURL = URL.createObjectURL(gifBlob);
+	const gifURL = URL.createObjectURL(gifBlob);
 
 
 	// This is the CSS for controling youtube's bar display.
-	var css = [
-		".ytp-play-progress {",
-		"    padding: 2.5px 1px;",
-		"    top: -2px;",
-		// TODO: Update this legacy behavior to more modern CSS3 standards
-		"    background: -webkit-gradient(",
-		"       linear,",
-		"       left top,",
-		"       left bottom,",
-		"       color-stop(0, red),",
-		"       color-stop(17%, #f90),",
-		"       color-stop(33%, #ff0),",
-		"       color-stop(50%, #3f0),",
-		"       color-stop(67%, #09f),",
-		"       color-stop(83%, #63f)",
-		"    );",
-		"}",
-		".ytp-scrubber-container {",
-		"    background: url(" + gifURL + ") no-repeat;",
-		"    background-size: 36px;",
-		"    width: 40px;",
-		"    height: 24px;",
-		"    margin-top: -4px",
-		"}",
-		".ytp-scrubber-container:hover {",
-		"    background-size: 40px;",
-		"    margin-top: -6px;",
-		"    margin-left: -2px",
-		"}",
-		".ytp-scrubber-button {",
-		"    display: none",
-		"}",
-	].join("\n");
+	const css = (`
+		.ytp-play-progress {
+			padding: 2.5px 1px;
+			top: -2px;
+			background: -webkit-gradient(
+				linear,
+				left top,
+				left bottom,
+				color-stop(0, red),
+				color-stop(17%, #f90),
+				color-stop(33%, #ff0),
+				color-stop(50%, #3f0),
+				color-stop(67%, #09f),
+				color-stop(83%, #63f)
+			);
+		}
+		.ytp-scrubber-container {
+			background: url(${gifURL}) no-repeat;
+			background-size: 36px;
+			width: 40px;
+			height: 24px;
+			margin-top: -4px;
+		}
+		.ytp-scrubber-container:hover {
+			background-size: 40px;
+			margin-top: -6px;
+			margin-left: -2px;
+		}
+		.ytp-scrubber-button {
+			display: none;
+		}
+	`)
+		// Removes all tabs
+		.replace(/\t/g, "")
+		// And replaces newlines with spaces because the CSS3 parsers
+		// in certain browsers may need whitespace after properties.
+		.replace(/\n/g, " ");
 
-	// IDK why this is that style of test. Will check into.
-	if (typeof GM_addStyle != "undefined") {
+	if (GM_addStyle != undefined) {
 		GM_addStyle(css);
-	} else if (typeof PRO_addStyle != "undefined") {
+	} else if (PRO_addStyle != undefined) {
 		PRO_addStyle(css);
-	} else if (typeof addStyle != "undefined") {
+	} else if (addStyle != undefined) {
 		addStyle(css);
 	} else {
 		var node = document.createElement("style");
