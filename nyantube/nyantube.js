@@ -89,16 +89,10 @@ const Base64 = {
 		.ytp-play-progress {
 			padding: 2.5px 1px;
 			top: -2px;
-			background: -webkit-gradient(
-				linear,
-				left top,
-				left bottom,
-				color-stop(0, red),
-				color-stop(17%, #f90),
-				color-stop(33%, #ff0),
-				color-stop(50%, #3f0),
-				color-stop(67%, #09f),
-				color-stop(83%, #63f)
+			background: linear-gradient(
+				to bottom,
+				#f00 0%, #f90 17%, #ff0 33%,
+				#3f0 50%, #09f 67%, #63f 83%
 			);
 		}
 		.ytp-scrubber-container {
