@@ -6,7 +6,7 @@
 // @homepage      https://github.com/m3tior/userscripts
 // @include       https://www.youtube.com/watch?*
 // @run-at        document-start
-// @version       1.0.0
+// @version       1.0.3
 // ==/UserScript==
 
 /**
