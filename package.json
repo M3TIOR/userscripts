@@ -1,5 +1,30 @@
 {
-	"devDependencies": {
-		"eslint-plugin-jest": "^23.8.2"
-	}
+  "devDependencies": {
+    "eslint-plugin-jest": "^23.8.2",
+    "rollup": "^2.26.5",
+    "userscript-meta": "^1.0.1"
+  },
+  "name": "userscripts",
+  "description": "This repository is here to host all the Tampermonkey / Greasemonkey userscripts I've written. Each userscript contained here is licensed under an MIT license independently to make the licensing more portable since each userscript needs to be distributable without any external files. The only pieces of code the GPL-2.0 apply to are the snippits of code I used for configuring my publishing environment within the repo IE: userscripts.py and other files in .src.",
+  "version": "1.0.0",
+  "main": "none",
+  "scripts": {
+    "test": "jest",
+		"build": "rollup -c rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m3tior/userscripts.git"
+  },
+  "keywords": [
+    "userscript",
+    "javascript",
+    "m3tior"
+  ],
+  "author": "M3TIOR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m3tior/userscripts/issues"
+  },
+  "homepage": "https://github.com/m3tior/userscripts#readme"
 }
