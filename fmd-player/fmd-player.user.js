@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Float My Damn Player!
-// @namespace    https://m3tior.github.io
+// @namespace    m3tior.github.io
 // @version      1.0.0
 // @description  Adds a native PIP button to html-5 video players.
 // @author       Ruby Allison Rose (aka: M3TIOR)
