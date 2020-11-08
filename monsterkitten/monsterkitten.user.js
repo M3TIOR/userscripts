@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MonsterKitty - Scratching Post
 // @namespace    https://m3tior.github.io/
-// @version      1.0
+// @version      2.0.0
 // @description  Adds download buttons and funcitonality to monstercat.com/browse
 // @author       M3TIOR
 // @match        https://www.monstercat.com/browse*
