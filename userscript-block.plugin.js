@@ -33,7 +33,8 @@ import http from 'http';
 
 
 export default function(options){
-	let metadataBlock = {};
+	let globalMetadataBlock = {};
+	let newMetadataBlock = {};
 	const defaults = {
 		jsonfile: null,
 		overrides: null,
@@ -46,11 +47,11 @@ export default function(options){
 	if (options.jsonfile != null){
 		const jsondata = fs.readFileSync(path.resolve(options.jsonfile), {encoding: "UTF8"});
 		// TODO: make more user-friendly by testing for improper objects.
-		Object.assign(metadataBlock, JSON.parse(jsondata));
+		Object.assign(globalMetadataBlock, JSON.parse(jsondata));
 	}
 
 	if (options.overrides != null){
-		Object.assign(metadataBlock, options.overrides);
+		Object.assign(globalMetadataBlock, options.overrides);
 	}
 
 	return {
@@ -65,13 +66,13 @@ export default function(options){
 				const existingBlock = found[0];
 				const initialMetadata = meta.parse(existingBlock);
 				// Overwrite initial data.
-				metadataBlock = Object.assign(initialMetadata, metadataBlock);
+				newMetadataBlock = Object.assign(initialMetadata, globalMetadataBlock);
 
 				code = code.replace(existingBlock, "");
 			}
 
-			if (options.downloadRequires && typeof(metadataBlock.require) !== "undefined") {
-				const requires = metadataBlock.require.map((url) => {
+			if (options.downloadRequires && typeof(newMetadataBlock.require) !== "undefined") {
+				const requires = newMetadataBlock.require.map((url) => {
 					return new Promise((resolve, reject) => {
 						http.get(url, (res) => {
 							const { statusCode } = res;
@@ -114,16 +115,16 @@ export default function(options){
 				const packages = [];
 				requires.forEach((e, i) => {
 					if (e != null)
-						metadataBlock.requires[i] = packages.push(e);
+						newMetadataBlock.requires[i] = packages.push(e);
 				});
 
-				metadataBlock.requires = metadataBlock.requires.filter((e) => typeof(e) !== 'string');
+				newMetadataBlock.requires = newMetadataBlock.requires.filter((e) => typeof(e) !== 'string');
 
 				code = "".concat(...packages, code);
 			}
 
 			return code;
 		},
-		banner: () => meta.stringify(metadataBlock),
+		banner: () => meta.stringify(newMetadataBlock),
 	};
 };
