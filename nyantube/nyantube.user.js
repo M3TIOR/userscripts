@@ -9,46 +9,47 @@
 // @version       1.0.6
 // ==/UserScript==
 
-/**
-*
-*  Base64 decode
-*  http://www.webtoolkit.info/
-*  Modified to suit my needs for binary decoding.
-*
-**/
-const Base64 = {
-	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-	decode : (input) => {
-		let output = [];
-		let chr1, chr2, chr3;
-		let enc1, enc2, enc3, enc4;
-		let i = 0;
-
-		// sanitizer
-		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-
-		while (i < input.length) {
-			enc1 = Base64._keyStr.indexOf(input.charAt(i++));
-			enc2 = Base64._keyStr.indexOf(input.charAt(i++));
-			enc3 = Base64._keyStr.indexOf(input.charAt(i++));
-			enc4 = Base64._keyStr.indexOf(input.charAt(i++));
-
-			chr1 = (enc1 << 2) | (enc2 >> 4);
-			chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-			chr3 = ((enc3 & 3) << 6) | enc4;
-
-			output.push(chr1);
-
-			if (enc3 != 64) output.push(chr2);
-			if (enc4 != 64) output.push(chr3);
-		}
-
-		return output;
-	},
-};
-
 (function() {
 	'use-strict';
+
+	/**
+	*
+	*  Base64 decode
+	*  http://www.webtoolkit.info/
+	*  Modified to suit my needs for binary decoding.
+	*
+	**/
+	const Base64 = {
+		_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+		decode : (input) => {
+			let output = [];
+			let chr1, chr2, chr3;
+			let enc1, enc2, enc3, enc4;
+			let i = 0;
+
+			// sanitizer (unused, our input will always be correctly formatted)
+			// input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+			while (i < input.length) {
+				enc1 = Base64._keyStr.indexOf(input.charAt(i++));
+				enc2 = Base64._keyStr.indexOf(input.charAt(i++));
+				enc3 = Base64._keyStr.indexOf(input.charAt(i++));
+				enc4 = Base64._keyStr.indexOf(input.charAt(i++));
+
+				chr1 = (enc1 << 2) | (enc2 >> 4);
+				chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+				chr3 = ((enc3 & 3) << 6) | enc4;
+
+				output.push(chr1);
+
+				if (enc3 != 64) output.push(chr2);
+				if (enc4 != 64) output.push(chr3);
+			}
+
+			return output;
+		},
+	};
+
 
 	// Base 64 encoded Nyan Cat GIF
 	const gif64 =
@@ -122,10 +123,10 @@ const Base64 = {
 	} else if (typeof addStyle !== "undefined") {
 		addStyle(css);
 	} else {
-		var node = document.createElement("style");
+		const node = document.createElement("style");
 		node.type = "text/css";
 		node.appendChild(document.createTextNode(css));
-		var heads = document.getElementsByTagName("head");
+		const heads = document.getElementsByTagName("head");
 		if (heads.length > 0) {
 			heads[0].appendChild(node);
 		} else {

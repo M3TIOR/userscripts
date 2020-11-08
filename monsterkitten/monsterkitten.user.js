@@ -33,72 +33,72 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-
-// Save a global reference so we don't drop it over and over again and
-// kill our performance like mad *facepalm*
-var observer = null;
-
-function ripSong(event){ // rips button contents
-	var btn = event.target.parentNode;
-	var ddl = btn.getAttribute("download-link");
-	var file_name = btn.getAttribute("artists-title") + " - " + btn.getAttribute("title");
-	// WHAT A PAIN THIS THING IS... SO JANK... thx https://github.com/greasemonkey/greasmonkey/issues/1834
-	GM_xmlhttpRequest({
-		method: "GET",
-		url: ddl,//"https://s3.amazonaws.com/data.monstercat.com/blobs/"+ddl.split("/")[4],
-		overrideMimeType: "text/plain; charset=x-user-defined",
-		onload: function(xhr){
-			var r = xhr.responseText;
-			var data = new Uint8Array(r.length);
-			for (var i = 0; i < r.length; i++) data [i] = r.charCodeAt(i);
-			var blob = new Blob([data], {type:"audio/mpeg"});
-			saveAs(blob, file_name+".mp3");
-		}
-	});
-}
-
-function ripAlbum(element){ // rips album contents
-	// TODO
-}
-
-function ripPage(element){ // rips current page contents
-	// TODO
-}
-
-function injectButtons(){
-	document.querySelectorAll("[dblc-action='playSongDblC']").forEach(function(song){
-		if (song.querySelector("[role='download-song']")) return;
-		if (!song.querySelector("[role='play-song']")) return; // skip special releases
-
-		// store the play button we're going to grab data from
-		var playbtn = song.querySelector("[role='play-song']").parentNode;
-
-		// copy the info of our play button table element into a new one
-		var buttonC = playbtn.cloneNode(true);
-		// focus on the button and clear it's contents but preserve attributes
-		var button = buttonC.children[0];
-
-		button.innerHTML="<i class='fa fa-download'></i>"; // font-awesome download button.
-		button.setAttribute("role", "download-song");	// change the role so we can find processed elements later.
-		button.setAttribute("style", "padding-left: 5px;"); // add some padding to improve usability
-
-		// switch the play-link attribute to download-link
-		button.setAttribute("download-link", button.getAttribute("play-link"));
-
-		// remove old unused attributes
-		button.removeAttribute("play-link");
-		button.removeAttribute("action");
-
-		// set the onclick for the button so it'll trigger
-		//button.onclick = Srip;
-		button.addEventListener("click", ripSong);
-
-		song.insertBefore(buttonC, playbtn.nextElementSibling);
-	});
-};
-
 (function() {
 	'use strict';
+
+	// Save a global reference so we don't drop it over and over again and
+	// kill our performance like mad *facepalm*
+	var observer = null;
+
+	function ripSong(event){ // rips button contents
+		var btn = event.target.parentNode;
+		var ddl = btn.getAttribute("download-link");
+		var file_name = btn.getAttribute("artists-title") + " - " + btn.getAttribute("title");
+		// WHAT A PAIN THIS THING IS... SO JANK... thx https://github.com/greasemonkey/greasmonkey/issues/1834
+		GM_xmlhttpRequest({
+			method: "GET",
+			url: ddl,//"https://s3.amazonaws.com/data.monstercat.com/blobs/"+ddl.split("/")[4],
+			overrideMimeType: "text/plain; charset=x-user-defined",
+			onload: function(xhr){
+				var r = xhr.responseText;
+				var data = new Uint8Array(r.length);
+				for (var i = 0; i < r.length; i++) data [i] = r.charCodeAt(i);
+				var blob = new Blob([data], {type:"audio/mpeg"});
+				saveAs(blob, file_name+".mp3");
+			}
+		});
+	}
+
+	function ripAlbum(element){ // rips album contents
+		// TODO
+	}
+
+	function ripPage(element){ // rips current page contents
+		// TODO
+	}
+
+	function injectButtons(){
+		document.querySelectorAll("[dblc-action='playSongDblC']").forEach(function(song){
+			if (song.querySelector("[role='download-song']")) return;
+			if (!song.querySelector("[role='play-song']")) return; // skip special releases
+
+			// store the play button we're going to grab data from
+			var playbtn = song.querySelector("[role='play-song']").parentNode;
+
+			// copy the info of our play button table element into a new one
+			var buttonC = playbtn.cloneNode(true);
+			// focus on the button and clear it's contents but preserve attributes
+			var button = buttonC.children[0];
+
+			button.innerHTML="<i class='fa fa-download'></i>"; // font-awesome download button.
+			button.setAttribute("role", "download-song");	// change the role so we can find processed elements later.
+			button.setAttribute("style", "padding-left: 5px;"); // add some padding to improve usability
+
+			// switch the play-link attribute to download-link
+			button.setAttribute("download-link", button.getAttribute("play-link"));
+
+			// remove old unused attributes
+			button.removeAttribute("play-link");
+			button.removeAttribute("action");
+
+			// set the onclick for the button so it'll trigger
+			//button.onclick = Srip;
+			button.addEventListener("click", ripSong);
+
+			song.insertBefore(buttonC, playbtn.nextElementSibling);
+		});
+	};
+
 
 	waitForKeyElements("button[role='play-song']",()=>{
 		injectButtons();

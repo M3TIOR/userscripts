@@ -30,39 +30,40 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-// Save a global refference for our observer so it doesn't get trash collected
-// after the configuration function exits.
-var observer = null;
-
-function injectButton(video){
-	let pipButton = document.createElement("button");
-	pipButton.style.position = "absolute";
-	pipButton.style.zIndex = 9999;
-	pipButton.dataset.injected = "true";
-
-	// I may decide to make this an svg l8r.
-	pipButton.innerHTML = "pip";
-
-	pipButton.addEventListener("click", (event) => {
-		event.target.disabled = true;
-
-		try {
-			console.log(video.requestPictureInPicture());
-			video.disabled=false;
-		}
-		catch(error) {
-			// TODO: Show error message to user.
-		}
-		finally {
-			event.target.disabled = false;
-		}
-	});
-
-	video.insertAdjacentElement("beforebegin", pipButton);
-}
-
 (function() {
 	'use strict';
+
+	// Save a global refference for our observer so it doesn't get trash collected
+	// after the configuration function exits.
+	var observer = null;
+
+	function injectButton(video){
+		let pipButton = document.createElement("button");
+		pipButton.style.position = "absolute";
+		pipButton.style.zIndex = 9999;
+		pipButton.dataset.injected = "true";
+
+		// I may decide to make this an svg l8r.
+		pipButton.innerHTML = "pip";
+
+		pipButton.addEventListener("click", (event) => {
+			event.target.disabled = true;
+
+			try {
+				console.log(video.requestPictureInPicture());
+				video.disabled=false;
+			}
+			catch(error) {
+				// TODO: Show error message to user.
+			}
+			finally {
+				event.target.disabled = false;
+			}
+		});
+
+		video.insertAdjacentElement("beforebegin", pipButton);
+	}
+
 
 	if (!('pictureInPictureEnabled' in document)) {
 		console.warn('The Picture-in-Picture Web API is not available.'); return;
@@ -70,7 +71,6 @@ function injectButton(video){
 	else if (!document.pictureInPictureEnabled) {
 		console.warn('The Picture-in-Picture Web API is disabled.'); return;
 	}
-
 
 	waitForKeyElements("iframe, video",()=>{
 		// For standalone videos we don't have to wait for DOM mutations.
