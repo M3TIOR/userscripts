@@ -35,6 +35,7 @@ import http from 'http';
 export default function(options){
 	let globalMetadataBlock = {};
 	let newMetadataBlock = {};
+	
 	const defaults = {
 		jsonfile: null,
 		overrides: null,
@@ -82,18 +83,18 @@ export default function(options){
 							// Any 2xx status code signals a successful response.
 							if (statusCode >= 200 && statusCode < 300) {
 								error = new Error('Request Failed.\n' +
-							                    `Status Code: ${statusCode}`);
+								                  `Status Code: ${statusCode}`);
 							}
 							else if (!/^text\/(javascript|plain)/.test(contentType)) {
-							  error = new Error('Invalid content-type.\n' +
-							                    `Expected text/javascript or text/plain but received ${contentType}`);
+							error = new Error('Invalid content-type.\n' +
+							                  `Expected text/javascript or text/plain but received ${contentType}`);
 							}
 
 							if (error) {
-							  // Consume response data to free up memory
-							  res.resume();
+								// Consume response data to free up memory
+								res.resume();
 								reject(error);
-							  return;
+								return;
 							}
 
 							res.setEncoding("utf8");

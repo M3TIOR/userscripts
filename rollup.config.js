@@ -70,12 +70,12 @@ export default fs.readdirSync(__dirname, {
 	.filter((p)=>p.isDirectory() && !p.name.startsWith(".") && p.name !== "node_modules")
 	.map((p)=>{ p = p.name;
 		return {
-		  input: `${p}/${p}.user.js`,
-		  output: {
-		    file: `${p}/${p}.min.user.js`,
+			input: `${p}/${p}.user.js`,
+			output: {
+				file: `${p}/${p}.min.user.js`,
 				// IIFE format should add a 'use-strict' directive automagically.
-		    format: 'iife',
-		  },
+				// format: 'iife',
+			},
 			plugins,
 		}
 	});
