@@ -3,6 +3,7 @@
 // @namespace    https://m3tior.github.io/
 // @version      0.0.1
 // @description  Adds the ability to use external photos as backgrounds for gmail themes
+// @homepage      https://github.com/m3tior/userscripts
 // @author       Ruby Allison Rose
 // @match        https://mail.google.com/mail/u/*
 // @grant        GM_addValue GM_getValue

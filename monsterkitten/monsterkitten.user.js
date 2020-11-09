@@ -3,6 +3,7 @@
 // @namespace    m3tior.github.io
 // @version      2.0.0
 // @description  Adds download buttons and funcitonality to monstercat.com/browse
+// @homepage      https://github.com/m3tior/userscripts
 // @author       M3TIOR
 // @match        https://www.monstercat.com/browse*
 // @grant        GM_xmlhttpRequest

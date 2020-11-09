@@ -3,6 +3,7 @@
 // @namespace    m3tior.github.io
 // @version      1.0.0
 // @description  Adds a native PIP button to html-5 video players.
+// @homepage     https://github.com/m3tior/userscripts
 // @author       Ruby Allison Rose (aka: M3TIOR)
 // @match        https://www.watchcartoononline.io/*
 // @grant        none

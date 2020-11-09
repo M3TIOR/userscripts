@@ -3,6 +3,7 @@
 // @namespace    m3tior.github.io
 // @version      1.0.0
 // @description  Prevents unscrupulous web pages from taking control of your tabs.
+// @homepage     https://github.com/m3tior/userscripts
 // @author       M3TIOR
 // @match        http://*/*
 // @match        https://*/*
