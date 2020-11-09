@@ -26,7 +26,7 @@ page loads* ***yay***!
 
 ### In The Future
 I'm hoping to add the ability for users to be able to toggle the script
-reqlinquish event at either `DOMContentLoaded` or `load` since the later
+relinquish event at either `DOMContentLoaded` or `load` since the later
 would enable prioritization of CSS loading and parsing as well, which could
 be a nice feature to have since the infrastructure already exists.
 
@@ -34,7 +34,11 @@ I learned a whole heck of a lot about the MutationObserver API and
 page loading while writing this so I think I can use that to remove a bunch
 of dependencies from my other userscripts and make them more, well, useable.
 But that's another goal for another day when I don't have more important things
-to oversee.
+to oversee. NOTE TO SELF (Make sure to use GM_addStyle for nyantube)
+
+SHIT SHIT SHIT, not ten minutes after I made this I found out that `noreferrer`
+is actually a [way better attribute to use](noreferrer). So that update will
+be happening soon preferably.
 
 
 Anyway, Till next time; Much love!
@@ -46,3 +50,4 @@ I haven't done any memory or CPU profiling on this yet so it may slow down
 web pages a bit since it uses a `MutationObserver` on the whole document.
 
 [dtmtorigin]: https://addons.mozilla.org/en-US/firefox/addon/dont-touch-my-tabs/
+[noreferrer]: https://www.w3.org/TR/referrer-policy/

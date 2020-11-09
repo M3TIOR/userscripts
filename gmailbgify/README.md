@@ -30,7 +30,7 @@ Please be patient and give me a little more time. >.> ***
  * [ ] Find a way to force content to load over HTTPS always
 
  * [ ] Implement custom background blur slider
- 
+
  * [ ] Implement custom background vignette slider
 
  * [ ] Investigate cross device background save feature using Google APIs
