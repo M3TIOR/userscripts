@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gmail Backgroundify!
 // @namespace    https://m3tior.github.io/
-// @version      0.0.1
+// @version      1.0.2
 // @description  Adds the ability to use external photos as backgrounds for gmail themes
 // @homepage      https://github.com/m3tior/userscripts
 // @author       Ruby Allison Rose

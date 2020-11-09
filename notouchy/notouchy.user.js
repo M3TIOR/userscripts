@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Don't Touch My Tabs! (M3TIOR's Implementation)
 // @namespace    m3tior.github.io
-// @version      1.0.0
+// @version      1.0.1
 // @description  Prevents unscrupulous web pages from taking control of your tabs.
 // @homepage     https://github.com/m3tior/userscripts
 // @author       M3TIOR
