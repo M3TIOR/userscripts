@@ -20,7 +20,7 @@
 	function getRange(){
 		const range = [];
 		for (let [e,v]=start; v <= end[1]; e=e.nextElementSibling, v++)
-			range.push(e.children[0].innerText);
+			range.push(e.children[0].children[0].innerText);
 
 		return range.join("");
 	}
@@ -38,7 +38,7 @@
 		const result = getRange();
 		// Use the new emca5 navigator.clipboard feature. I don't feel like including
 		// unnecessary code in this plugin. Must be as fast as possible.
-		navigator.clipboard.writeText(`Range ( ${start[1]} - ${end[1]} ) --> ${result}`);
+		navigator.clipboard.writeText(`Range ( ${start[1].toString(16)} - ${end[1].toString(16)} ) --> ${result}`);
 		// GM_setClipboard(text, "text");
 	});
 
