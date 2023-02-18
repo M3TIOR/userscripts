@@ -94,7 +94,7 @@
 			"background: linear-gradient( "+
 				"to bottom, "+
 				"#f00 0%, #f90 17%, #ff0 33%, "+
-				"#3f0 50%, #09f 67%, #63f 83%; "+
+				"#3f0 50%, #09f 67%, #63f 83%"+
 			"); "+
 		"} "+
 		".ytp-scrubber-container { "+
