@@ -98,7 +98,7 @@
 			"); "+
 		"} "+
 		".ytp-scrubber-container { "+
-			"background: url(${gifURL}) no-repeat; "+
+			`background: url(${gifURL}) no-repeat; `+
 			"background-size: 36px; "+
 			"width: 40px; "+
 			"height: 24px; "+
